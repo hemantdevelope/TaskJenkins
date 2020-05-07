@@ -1,0 +1,8 @@
+if sudo docker ps | grep testing
+then
+echo "Testing is Already Up"
+else
+sudo docker run -dit --name testing -p 91:80 -v /testing:/usr/local/apache2/htdocs httpd:latest
+fi
+sudo cp -rvf * /testing/
+echo "The Testing Server Has been Updated"
