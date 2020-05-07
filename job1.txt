@@ -1,0 +1,8 @@
+if sudo docker ps | grep production
+then
+echo "Production is Already Up"
+else
+sudo docker run -dit --name production -p 92:80 -v /production:/usr/local/apache2/htdocs httpd:latest
+fi
+sudo cp -rvf * /production/
+echo "The Production Server Has been Updated"
