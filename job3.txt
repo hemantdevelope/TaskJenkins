@@ -1,0 +1,23 @@
+#!/bin/bash
+#changing directory to repository
+sudo cd /root/GitProject
+#changing to master for merge
+if ls -a | grep .git
+then
+sudo git checkout developer || echo “developer branch does not exist”
+sudo git checkout master || echo “master branch does not exist”
+sudo git pull origin master || echo “pull from origin master Failed”
+sudo git merge developer || echo “merging of master and developer Failed”
+sudo git push http://username:password@github.com/username/TaskJenkins.git || echo “Push to origin master Failed”
+
+else
+echo “Not in a git repo!”
+exit 1
+fi
+if sudo docker ps | grep testing
+then
+#removing the testing webserver
+sudo docker rm -f testing
+fi
+#delete the merged branch
+sudo git branch -d developer
